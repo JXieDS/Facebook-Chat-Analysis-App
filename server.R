@@ -24,6 +24,7 @@ options(shiny.maxRequestSize=50*1024^2) # 50 MB max. Upload size
 Sys.setlocale(category = "LC_ALL", "en_US.UTF-8")
 #Windows
 Sys.setlocale("LC_ALL","English")
+
 shinyServer(function(input, output) {
   
   chatDF <- reactive({   
@@ -34,6 +35,7 @@ shinyServer(function(input, output) {
       if(isolate(input$all)){
         ids <- seq(1,length(nThreads))
       }else{
+       
         isolate(id_list())->filtered_df
         #necessary because input could be substring of other thread
         filtered_df$participants <- paste(":", filtered_df$participants, ":")
@@ -145,11 +147,13 @@ shinyServer(function(input, output) {
   output$file <- renderDataTable({id_list()})
   
   unique_participants <- reactive({
+    web() #to get the right trigger 
     dfp <- isolate(id_list())
     str_split(dfp$participants ,pattern = ",")->participants_list
-    lapply(participants, function(x) gsub("^\\s+|\\s+$","",x))->participants_list
+    lapply(participants_list, function(x) gsub("^\\s+|\\s+$","",x))->participants_list
     unlist(participants_list)->participants
     unique(participants)
+    
   })
   output$fancyfilter <- renderUI({
     selectInput('in6', label = 'Users present in Thread', unique_participants(), multiple=TRUE, selectize=TRUE)
