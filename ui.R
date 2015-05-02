@@ -65,7 +65,7 @@ shinyUI(fluidPage(
                  h3("About the App"),
                  "This App was created by Markus Heuchert in Spring 2015. It was first designed for personal use only, but since there is nothing like this on the web, you might as well find it interesting to know about what, how and when you are chatting with whom.",
                  "Some analytical functionalities were not implemented on purpose because this should not be a tool used to spy on friends.", br(),
-                 "Get the Source from github",br(),
+                 "Get the Source from ",HTML('<a href="https://github.com/knusperman/Facebook-Chat-Analysis-App" target="_blank">Github</a>'),br(),
                  HTML('<a href="mailto:m.heuchert@uni-muenster.de">Contact me</a>'), " if you like."
                  
                  
